@@ -9,6 +9,8 @@ cambiar_dir(arriba)
 mover
 matar
 disparar
+curarce
+curarce
 """
 
 
@@ -52,12 +54,12 @@ for i in range(8):
     espacio.append([0]*7)
     
 #Posicion de los enemigos en el mapa
-espacio[4][2]=0
-espacio[6][2]=0
-espacio[5][5]=0
-espacio[3][4]=0
-espacio[2][1]=0
-espacio[1][5]=0
+espacio[4][2]=99
+espacio[6][2]=99
+espacio[5][5]=99
+espacio[3][4]=99
+espacio[2][1]=99
+espacio[1][5]=99
 
 pp = pprint.PrettyPrinter()
 pp.pprint(espacio)
@@ -73,6 +75,8 @@ def jugar(espacio,programa):
     pos = (7,0)
     # Vida del jugador
     vida = 60
+
+    curas=2
 
     
 
@@ -109,28 +113,28 @@ def jugar(espacio,programa):
 
         if cmd == "matar":
             if espacio[pos[0]][pos[1]]==99:
-                print("Mato el enemigo!!")
+                print("Degollo al enemigo")
                 espacio[pos[0]][pos[1]]=0
             else:
                 print("No hay enemigo al frente")
 
         if cmd == "disparar":
-            if (pos==(6,0) and direccion==1) or (pos==(6,4) and direccion==3) or (pos==(4,2) and direccion==2 and espacio[4][2]==0):
+            if (pos==(6,0) and direccion==1 and espacio[6][2]==99) or (pos==(6,4) and direccion==3 and espacio[6][2]==99) or (pos==(4,2) and direccion==2 and espacio[4][2]==0 and espacio[6][2]==99):
                 print("Enemigo acabado")
                 espacio[6][2]=0
-            elif (pos==(4,0) and direccion==1) or (pos==(6,2) and direccion == 0 and espacio[6][2]==0) or (pos==(2,2) and direccion==2)  :
+            elif (pos==(4,0) and direccion==1 and espacio[4][2]==99) or (pos==(6,2) and direccion == 0 and espacio[6][2]==0 and espacio[4][2]==99) or (pos==(2,2) and direccion==2 and espacio[4][2]==99)  :
                 print("Un enemigo menos")
                 espacio[4][2]=0
-            elif (pos == (5,3) and direccion == 1) or (pos==(7,6) and direccion == 0) or (pos==(3,5) and direccion==2):
+            elif (pos == (5,3) and direccion == 1 and espacio[5][5]==99) or (pos==(7,6) and direccion == 0 and espacio[5][5]==99) or (pos==(3,5) and direccion==2 and espacio[5][5]==99):
                 print("Justo en la cabeza")
                 espacio[5][5]=0
-            elif (pos==(3,2) and direccion == 1) or (pos==(3,6) and direccion==3) or (pos==(5,4) and direccion==0) or (pos==(1,4) and direccion==2):
+            elif (pos==(3,2) and direccion == 1 and espacio[3][4]==99) or (pos==(3,6) and direccion==3 and espacio[3][4]==99) or (pos==(5,4) and direccion==0 and espacio[3][4]==99) or (pos==(1,4) and direccion==2 and espacio[3][4]==99):
                 print("Enemigo muerto")
                 espacio[3][4]==0
-            elif (pos == (3,5) and direccion==0) or (pos==(1,3) and direccion == 1):
+            elif (pos == (3,5) and direccion==0 and espacio[1][5]==99) or (pos==(1,3) and direccion == 1 and espacio[1][5]==99):
                 print("Enemigo asesinado")
                 espacio[1][5]=0
-            elif (pos == (2,3) and direccion == 3) or (pos==(4,1) and direccion==0) or (pos==(0,1) and direccion==2):
+            elif (pos == (2,3) and direccion == 3 and espacio[2][1]==99) or (pos==(4,1) and direccion==0 and espacio[2][1]==99) or (pos==(0,1) and direccion==2 and espacio[2][1]==99):
                 print("Enemigo acabado")
                 espacio[2][1]=0
             else:
@@ -169,6 +173,11 @@ def jugar(espacio,programa):
 ##                ter=juego_terminado()
 ##                return ter
 
+        if cmd == "curarce":
+            vidaac=vidaac+10
+            curas=curas-1
+            print("La vida actual es",vidaac,"Las curas actuales son",curas)
+
         
             
 
@@ -190,20 +199,3 @@ def jugar(espacio,programa):
 
     print("Nueva direccion:",direccion)
 print()
-
-    
-
-    
-
-        
-
-
-            
-            
-        
-            
-
-          
-
-jugar(espacio,prg)
-pp.pprint(espacio)
