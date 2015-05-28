@@ -11,6 +11,7 @@ matar
 disparar
 curarce
 curarce
+curarce
 """
 
 
@@ -54,12 +55,12 @@ for i in range(8):
     espacio.append([0]*7)
     
 #Posicion de los enemigos en el mapa
-espacio[4][2]=99
-espacio[6][2]=99
-espacio[5][5]=99
-espacio[3][4]=99
-espacio[2][1]=99
-espacio[1][5]=99
+espacio[4][2]=0
+espacio[6][2]=0
+espacio[5][5]=0
+espacio[3][4]=0
+espacio[2][1]=0
+espacio[1][5]=0
 
 pp = pprint.PrettyPrinter()
 pp.pprint(espacio)
@@ -75,7 +76,7 @@ def jugar(espacio,programa):
     pos = (7,0)
     # Vida del jugador
     vida = 60
-
+    #curas del jugador
     curas=2
 
     
@@ -167,16 +168,18 @@ def jugar(espacio,programa):
             if espacio[6][2]==0 and espacio[4][2]==0 and espacio[5][5]==0 and espacio[3][4]==0 and espacio[1][5]==0 and espacio[2][1]==0:
                 print("El juego ha terminado, haz acabado con todos los enemigos")
                 
-
-##            elif vidaac==0:
-##                print("El juego ha terminado, haz perdido")
-##                ter=juego_terminado()
-##                return ter
+                
+                
+        
 
         if cmd == "curarce":
             vidaac=vidaac+10
             curas=curas-1
-            print("La vida actual es",vidaac,"Las curas actuales son",curas)
+            if curas>=0:
+                print("las curas actuales son",curas,"la vida actual es",vidaac)
+            else:
+                print("Se te acabaron las curas")
+                
 
         
             
@@ -184,18 +187,3 @@ def jugar(espacio,programa):
 
             print("Nueva direccion:",direccion)
         print()
-
-
-    
-
-
-
-       
-
-
-        
-            
-
-
-    print("Nueva direccion:",direccion)
-print()
